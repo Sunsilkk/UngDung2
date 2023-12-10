@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Logintest" parent="Theme.Material3.Light">
+
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+        <item name="android:displayOptions">disableHome</item>
+
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="buttonStyle">@style/Widget.Material3.Button.ElevatedButton</item>
+
+    </style>
+
+    <style name="Theme.Logintest" parent="Base.Theme.Logintest" />
+</resources>
