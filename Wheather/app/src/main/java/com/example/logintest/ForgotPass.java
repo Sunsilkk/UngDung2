@@ -21,9 +21,6 @@ public class ForgotPass extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().hide();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgotpass);
 

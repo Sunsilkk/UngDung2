@@ -25,9 +25,6 @@ public class RegisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regis);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().hide();
-
         Button btnSignup = findViewById(R.id.btnSignUp);
         usernameTextInputLayout  = findViewById(R.id.Username);
         emailTextInputLayout  = findViewById(R.id.email);

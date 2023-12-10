@@ -31,9 +31,6 @@ public class Webview2 extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().hide();
-
         CookieManager.getInstance().removeAllCookies(null);
 
 

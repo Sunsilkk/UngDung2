@@ -29,9 +29,6 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().hide();
-
         backgroundImage = findViewById(R.id.backgroundImage);
         changeButton = findViewById(R.id.changeButton);
         dot1 = findViewById(R.id.dot1);

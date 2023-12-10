@@ -31,9 +31,6 @@ public class webview extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().hide();
-
         CookieManager.getInstance().removeAllCookies(null);
 
         String usr = extras.getString("EXTRA_USERNAME");
