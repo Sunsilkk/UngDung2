@@ -61,6 +61,8 @@ public class token {
                 {
                     @SerializedName("description")
                     public String description;
+                    @SerializedName("main")
+                    public String main;
                 }
             }
         }
