@@ -145,7 +145,7 @@ public class ChartFragment extends Fragment {
 
                 }
 
-                Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(accToken, aid, att ,body);
+                Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(ApIClient.getToken(), aid, att ,body);
                 call.enqueue(new Callback<JsonArray>() {
                     @Override
                     public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {

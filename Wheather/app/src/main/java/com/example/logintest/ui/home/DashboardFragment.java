@@ -39,7 +39,7 @@ public class DashboardFragment extends Fragment {
         TextView humid = rootView.findViewById(R.id.humid);
         TextView hi = rootView.findViewById(R.id.hi);
         ImageView descrImg = rootView.findViewById(R.id.descrImg);
-
+        hi.setText("Hi, " + ApIClient.getName());
         APIInterface apiInterface;
 
         apiInterface = ApIClient.getClient().create(APIInterface.class);
