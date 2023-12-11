@@ -172,5 +172,18 @@
         app:layout_constraintStart_toEndOf="@+id/sunrise"
         app:layout_constraintTop_toBottomOf="@+id/sunsetImg" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="153dp"
+        android:layout_height="52dp"
+        android:fontFamily="@font/alon_bold"
+        android:text="UiTwT"
+        android:textColor="#121B46"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
