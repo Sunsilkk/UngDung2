@@ -51,8 +51,6 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<token>() {
             @Override
             public void onResponse(Call<token> call, Response<token> response) {
-                Log.d("API CALL", response.code()+"");
-                Log.d ("API CALL", response.toString());
                 token asset = response.body();
 
                 String dt = asset.attributes.data.value.dt;

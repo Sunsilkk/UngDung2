@@ -7,6 +7,20 @@
     tools:context=".MainActivity">
 
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btndaynight"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:icon="@drawable/login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password"
+        app:layout_constraintVertical_bias="0.723" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

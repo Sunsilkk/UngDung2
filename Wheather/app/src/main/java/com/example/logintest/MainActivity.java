@@ -1,8 +1,10 @@
 package com.example.logintest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,6 +102,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ForgotPass.class);
                 startActivity(intent);
+            }
+        });
+        Button buttonchange = findViewById(R.id.btndaynight);
+        buttonchange.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                int newNightMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES ?
+                        AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES;
+                AppCompatDelegate.setDefaultNightMode(newNightMode);
+                recreate();
             }
         });
     }
