@@ -72,7 +72,7 @@
         app:layout_constraintBottom_toTopOf="@id/ForgotPass"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.4"
-        android:textColor="#121B46"
+        android:textColor="#00d7cb"
         />
 
 

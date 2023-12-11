@@ -31,7 +31,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/alon_bold"
         android:text="UiTwT"
-        android:textColor="#3CB4C4"
+        android:textColor="#00d7cb"
         android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/Username"
         app:layout_constraintEnd_toEndOf="parent"
