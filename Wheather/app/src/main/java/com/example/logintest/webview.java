@@ -52,7 +52,6 @@ public class webview extends AppCompatActivity {
                     view.evaluateJavascript(redirect,null);
                 }
 
-
                 if (url.contains("login-actions/registration")) {
                     Log.d("webView", "onPageFinished: Fill form");
 
