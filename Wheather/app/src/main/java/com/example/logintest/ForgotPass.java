@@ -26,7 +26,7 @@ public class ForgotPass extends AppCompatActivity {
 
         Forgotpassinputlayout = findViewById(R.id.ForgotPass);
         Button btnreset = findViewById(R.id.btnReset);
-//        Button btnBack = findViewById(R.id.btnBack);
+        Button btnBack = findViewById(R.id.btnBack2);
 
         btnreset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +41,8 @@ public class ForgotPass extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        btnBack.setOnClickListener(v -> {
-//            finish();
-//        });
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
     }
 }
