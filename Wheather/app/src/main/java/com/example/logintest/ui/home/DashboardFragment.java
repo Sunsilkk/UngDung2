@@ -9,15 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.logintest.API.APIInterface;
 import com.example.logintest.API.ApIClient;
 import com.example.logintest.Model.token;
 import com.example.logintest.R;
-import com.example.logintest.databinding.FragmentHomeBinding;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -27,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class DashboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

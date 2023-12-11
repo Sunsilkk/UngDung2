@@ -2,7 +2,6 @@ package com.example.logintest.ui.dashboard;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 
-public class DashboardFragment extends Fragment {
+public class MapFragment extends Fragment {
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private LinearLayout layout;
