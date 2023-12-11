@@ -1,6 +1,5 @@
 package com.example.logintest.ui.notifications;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,16 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.logintest.API.APIWeather;
-import com.example.logintest.API.ApIClient;
 import com.example.logintest.API.Asset;
 import com.example.logintest.API.dataPoint;
 import com.example.logintest.R;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -47,7 +42,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class NotificationsFragment extends Fragment {
+public class ChartFragment extends Fragment {
 
     String[] attributes = {"temperature","humidity","rainfall","windSpeed"};
     String[] times = {"Hour","Day","Week","Month","Year"};
