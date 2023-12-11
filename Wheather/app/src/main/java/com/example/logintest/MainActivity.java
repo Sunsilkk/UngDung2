@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             token loggedInUser = response.body();
                             String accessToken = loggedInUser.access_token;
                             ApIClient.setToken(accessToken);
+                            ApIClient.setUsername(enteredUsername);
                             intent = new Intent(MainActivity.this, Dashboard.class);
                             startActivity(intent);
                         } else {

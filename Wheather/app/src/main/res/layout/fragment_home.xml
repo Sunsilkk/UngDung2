@@ -18,10 +18,10 @@
         android:id="@+id/hi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="52dp"
         android:text="Hi, ?"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,10 +29,11 @@
         android:id="@+id/border1"
         android:layout_width="377dp"
         android:layout_height="283dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hi"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/border" />
 
     <ImageView
@@ -115,8 +116,8 @@
         android:id="@+id/humidImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/border2"
         app:layout_constraintTop_toBottomOf="@+id/sunrise"
         app:srcCompat="@drawable/humidity" />
@@ -125,8 +126,8 @@
         android:id="@+id/humid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="Humid"
         app:layout_constraintStart_toEndOf="@+id/humidImg"
         app:layout_constraintTop_toBottomOf="@+id/sunrise" />
@@ -135,8 +136,8 @@
         android:id="@+id/sunriseImg"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintStart_toStartOf="@+id/border2"
         app:layout_constraintTop_toTopOf="@+id/border2"
         app:srcCompat="@drawable/sunrise" />
@@ -145,8 +146,8 @@
         android:id="@+id/sunrise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="12dp"
         android:text="Sunrise"
         app:layout_constraintStart_toStartOf="@+id/border2"
         app:layout_constraintTop_toBottomOf="@+id/sunriseImg" />
@@ -155,8 +156,8 @@
         android:id="@+id/sunsetImg"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintStart_toEndOf="@+id/sunriseImg"
         app:layout_constraintTop_toTopOf="@+id/border2"
         app:srcCompat="@drawable/sunset" />
@@ -165,8 +166,8 @@
         android:id="@+id/sunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="16dp"
         android:text="Sunset"
         app:layout_constraintStart_toEndOf="@+id/sunrise"
         app:layout_constraintTop_toBottomOf="@+id/sunsetImg" />

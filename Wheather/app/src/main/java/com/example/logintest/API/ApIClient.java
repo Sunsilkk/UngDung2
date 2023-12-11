@@ -24,6 +24,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApIClient {
     private static Retrofit retrofit ;
     private static String token;
+    private static String username;
+    public static void setUsername(String name) {
+        ApIClient.username = name;
+    }
+    public static String getName() {
+        return username;
+    }
+
 
    public static void setToken(String token) {
         ApIClient.token = token;
