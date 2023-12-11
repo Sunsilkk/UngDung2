@@ -137,7 +137,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@+id/border2"
         app:layout_constraintTop_toTopOf="@+id/border2"
         app:srcCompat="@drawable/sunrise" />
@@ -156,8 +156,8 @@
         android:id="@+id/sunsetImg"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toEndOf="@+id/sunriseImg"
         app:layout_constraintTop_toTopOf="@+id/border2"
         app:srcCompat="@drawable/sunset" />
@@ -166,7 +166,7 @@
         android:id="@+id/sunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="16dp"
         android:text="Sunset"
         app:layout_constraintStart_toEndOf="@+id/sunrise"

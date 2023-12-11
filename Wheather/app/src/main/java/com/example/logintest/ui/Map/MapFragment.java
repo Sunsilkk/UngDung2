@@ -1,4 +1,4 @@
-package com.example.logintest.ui.dashboard;
+package com.example.logintest.ui.Map;
 
 import android.Manifest;
 
@@ -7,6 +7,9 @@ import com.example.logintest.API.ApIClient;
 import com.example.logintest.Model.AssetID;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,12 +68,26 @@ public class MapFragment extends Fragment {
         Marker Station1Marker = new Marker(map);
         Station1Marker.setPosition(Station1);
         Station1Marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Station1Marker.setIcon(ctx.getDrawable(R.drawable.baseline_cloud_24));
+        Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.temsensor);
+
+        int iconWidth = 40; // Specify the desired width of the icon in pixels
+        int iconHeight = 40; // Specify the desired height of the icon in pixels
+        Bitmap bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) icon).getBitmap(), iconWidth, iconHeight, false);
+        Drawable resizedIcon = new BitmapDrawable(getResources(), bitmap);
+        Station1Marker.setIcon(resizedIcon);
+
 
         Marker Station2Marker = new Marker(map);
         Station2Marker.setPosition(Station2);
         Station2Marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Station2Marker.setIcon(ctx.getDrawable(R.drawable.baseline_cloud_24));
+
+        Drawable icon1 = ContextCompat.getDrawable(requireContext(), R.drawable.temsensor);
+        int iconWidth1 = 40; // Specify the desired width of the icon in pixels
+        int iconHeight1 = 40; // Specify the desired height of the icon in pixels
+        Bitmap bitmap1 = Bitmap.createScaledBitmap(((BitmapDrawable) icon1).getBitmap(), iconWidth1, iconHeight1, false);
+        Drawable resizedIcon1 = new BitmapDrawable(getResources(), bitmap1);
+        Station1Marker.setIcon(resizedIcon1);
+
 
         Station1Marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
             @Override

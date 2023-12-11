@@ -28,7 +28,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         TextView day = rootView.findViewById(R.id.day);
         TextView location = rootView.findViewById(R.id.location);
         TextView Temper = rootView.findViewById(R.id.temp);

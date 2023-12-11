@@ -1,4 +1,4 @@
-package com.example.logintest.ui.notifications;
+package com.example.logintest.ui.Chart;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -69,7 +69,7 @@ public class ChartFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_chart, container, false);
 
         txtattribute = rootView.findViewById(R.id.attribute);
         txttime = rootView.findViewById(R.id.time);
@@ -115,7 +115,7 @@ public class ChartFragment extends Fragment {
         APIWeather apiInterface = retrofit.create(APIWeather.class);
         String aid = "5zI6XqkQVSfdgOrZ1MyWEf";
 
-        String atoken = "Bearer "+ApIClient.getToken();
+        String atoken = "Bearer "+ ApIClient.getToken();
 
 
         show.setOnClickListener(new View.OnClickListener() {
@@ -338,7 +338,6 @@ public class ChartFragment extends Fragment {
 
                             LineData lineData = new LineData(dataSet);
                             chart.setData(lineData);
-// Styling
                             chart.getDescription().setEnabled(false); // No description at the bottom
                             chart.getAxisLeft().setDrawGridLines(false); // No grid lines
                             chart.getAxisLeft().setDrawAxisLine(false); // No axis line
