@@ -114,8 +114,7 @@ public class ChartFragment extends Fragment {
 
         APIWeather apiInterface = retrofit.create(APIWeather.class);
         String aid = "5zI6XqkQVSfdgOrZ1MyWEf";
-        String accToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoREkwZ2hyVlJvaE5zVy1wSXpZeDBpT2lHMzNlWjJxV21sRk4wWGE1dWkwIn0.eyJleHAiOjE3MDIzNjk4MTUsImlhdCI6MTcwMjI4MzQxNSwianRpIjoiODAyYjYyMTgtYWQ2MS00NTg3LWI2MGEtOTQxNDUwNmFmMjQyIiwiaXNzIjoiaHR0cHM6Ly91aW90Lml4eGMuZGV2L2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI0ZTNhNDQ5Ni0yZjE5LTQ4MTMtYmYwMC0wOTQwN2QxZWU4Y2IiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJvcGVucmVtb3RlIiwic2Vzc2lvbl9zdGF0ZSI6IjAzNDNmZTM0LTRjMjAtNDY2Ni04ZTIwLTk3NDc3YTQ5ZTcwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91aW90Lml4eGMuZGV2Il0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJvcGVucmVtb3RlIjp7InJvbGVzIjpbInJlYWQ6bWFwIiwicmVhZDpydWxlcyIsInJlYWQ6aW5zaWdodHMiLCJyZWFkOmFzc2V0cyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMDM0M2ZlMzQtNGMyMC00NjY2LThlMjAtOTc0NzdhNDllNzAyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiVHJ1b25nIEJhbyIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXIiLCJnaXZlbl9uYW1lIjoiVHJ1b25nIiwiZmFtaWx5X25hbWUiOiJCYW8iLCJlbWFpbCI6InVzZXJAaXh4Yy5kZXYifQ.UG_Yj0TWPm-5UEdIuJmdfZW_OV2HsKpwOgikxbBGrBK9PguWUw8ci6dQte5TwUdGX5J1P2GTdvxJAZpmoTsVGqQ-U1nC91Op2XedxerErrYKfQ6aBPThd2JsYulvcyD9E7ID03f0Gwywoq0qaKl_GhDUDapK1zc3fsQd-UE6kM-56RHBIPmOi52EUJkSidF8NKZ-Vle8DhBWDfF0LSVg3cTIFds3CanjNDbi52QxK_s5NnjfkzScezzuhIajnrIA3E2fFmX4D6LyDiA43hcFae-MHdJ1yUbJKyItZxb315QvCXd8_7P9plGQo_q_cS8BwZDhJcTlPeBmvEuf074tKA";
-
+        String atoken = "Bearer "+ApIClient.getToken();
 
 
         show.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +144,7 @@ public class ChartFragment extends Fragment {
 
                 }
 
-                Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(accToken, aid, att ,body);
+                Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(atoken, aid, att ,body);
                 call.enqueue(new Callback<JsonArray>() {
                     @Override
                     public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
