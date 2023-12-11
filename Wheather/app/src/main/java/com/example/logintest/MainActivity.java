@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent(MainActivity.this, Dashboard.class);
                             startActivity(intent);
                         } else {
-
                         }
                     }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
         TextView Sunset = rootView.findViewById(R.id.sunset);
         TextView humid = rootView.findViewById(R.id.humid);
         TextView hi = rootView.findViewById(R.id.hi);
+        ImageView descrImg = rootView.findViewById(R.id.descrImg);
 
         APIInterface apiInterface;
 
@@ -99,9 +101,23 @@ public class HomeFragment extends Fragment {
                 humid.setText("Humidity \n"+ humidity + "%");
                 String Location = asset.attributes.data.value.name;
                 location.setText(Location);
-                String weather = asset.attributes.data.value.weather[0].description;
-                descr.setText(weather);
-                Log.d("API CALL","add vo ne");
+                String desc = asset.attributes.data.value.weather[0].description;
+                descr.setText(desc);
+                String main = asset.attributes.data.value.weather[0].main;
+                switch (main) {
+                    case "Clouds":
+                        descrImg.setImageResource(R.drawable.cloud);
+                        break;
+                    case "Clear":
+                        descrImg.setImageResource(R.drawable.clear);
+                        break;
+                    case "Rain":
+                        descrImg.setImageResource(R.drawable.rain);
+                        break;
+                    case "Sunny":
+                        descrImg.setImageResource(R.drawable.sun);
+                        break;
+                }
             }
 
             @Override
