@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.logintest.API.APIWeather;
+import com.example.logintest.API.ApIClient;
 import com.example.logintest.API.Asset;
 import com.example.logintest.API.dataPoint;
 import com.example.logintest.R;
@@ -114,6 +115,7 @@ public class NotificationsFragment extends Fragment {
                 .baseUrl("https://uiot.ixxc.dev/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         APIWeather apiInterface = retrofit.create(APIWeather.class);
         String aid = "5zI6XqkQVSfdgOrZ1MyWEf";
 
