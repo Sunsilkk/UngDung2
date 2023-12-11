@@ -10,7 +10,7 @@ public class Asset {
     @SerializedName("type")
     private String type;
 
-    public Asset(long fromTimestamp, long toTimestamp, String type){
+    public Asset( long fromTimestamp, long toTimestamp, String type){
 
         this.fromTimestamp = fromTimestamp;
         this.toTimestamp = toTimestamp;
