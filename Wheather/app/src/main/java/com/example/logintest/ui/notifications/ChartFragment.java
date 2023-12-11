@@ -114,11 +114,9 @@ public class ChartFragment extends Fragment {
 
         APIWeather apiInterface = retrofit.create(APIWeather.class);
         String aid = "5zI6XqkQVSfdgOrZ1MyWEf";
-<<<<<<< HEAD
+
         String atoken = "Bearer "+ApIClient.getToken();
 
-=======
->>>>>>> 5b958088d30b083fab58baa0ea4c6a5773017492
 
         show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,13 +144,10 @@ public class ChartFragment extends Fragment {
                     body = new Asset((long)fromtime, (long)totime,"string");
 
                 }
-<<<<<<< HEAD
 
                 Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(atoken, aid, att ,body);
-=======
-                String token = "Bearer" + ApIClient.getToken();
-                Call<JsonArray> call = apiInterface.getAssetDatapointAttribute(token, aid, att ,body);
->>>>>>> 5b958088d30b083fab58baa0ea4c6a5773017492
+
+
                 call.enqueue(new Callback<JsonArray>() {
                     @Override
                     public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
