@@ -20,12 +20,14 @@ public class RegisActivity extends AppCompatActivity {
     private TextInputLayout emailTextInputLayout;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regis);
 
         Button btnSignup = findViewById(R.id.btnSignUp);
+        Button btnBack = findViewById(R.id.btnBack);
         usernameTextInputLayout  = findViewById(R.id.Username);
         emailTextInputLayout  = findViewById(R.id.email);
         passwordTextInputLayout  = findViewById(R.id.Pwd);
@@ -51,9 +53,11 @@ public class RegisActivity extends AppCompatActivity {
             String dataError = extras.getString("dataError");
             passwordTextInputLayout.setError(dataError);
 
-
             intent.putExtras(extras);
             startActivityForResult(intent, REGIS_REQUEST_CODE);
+        });
+        btnBack.setOnClickListener(v -> {
+            finish();
         });
     }
 

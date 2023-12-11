@@ -26,9 +26,9 @@ public class ForgotPass extends AppCompatActivity {
 
         Forgotpassinputlayout = findViewById(R.id.ForgotPass);
         Button btnreset = findViewById(R.id.btnReset);
+        Button btnBack = findViewById(R.id.btnBack2);
 
         btnreset.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ForgotPass.this, Webview2.class);
@@ -40,10 +40,9 @@ public class ForgotPass extends AppCompatActivity {
                 intent.putExtras(extras);
                 startActivity(intent);
             }
-
-
         });
-
-
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
     }
 }
