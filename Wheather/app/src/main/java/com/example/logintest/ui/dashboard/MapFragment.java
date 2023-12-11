@@ -1,13 +1,19 @@
 package com.example.logintest.ui.dashboard;
 
 import android.Manifest;
+
+import com.example.logintest.API.APIInterface;
+import com.example.logintest.API.ApIClient;
+import com.example.logintest.Model.AssetID;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -24,15 +30,22 @@ import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MapFragment extends Fragment {
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private LinearLayout layout;
+    TextView textView;
     private long ZoomSpeed = 500;
     private double MinZoom = 18.0;
     private double MaxZoom = 21.0;
     private double ZoomLevel = 19.5;
     private GeoPoint UITLocation = new GeoPoint(10.870, 106.80324);
+    String Station1STR = "Default Weather";
+    String Station2STR = "Light";
     private GeoPoint Station1 = new GeoPoint(10.869778736885038, 106.80280655508835);
     private GeoPoint Station2 = new GeoPoint(10.869778736885038, 106.80345028525176);
 
@@ -40,6 +53,8 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+        textView = view.findViewById(R.id.textMap);
+        textView.setVisibility(View.INVISIBLE);
 
         Context ctx = requireContext();
 
@@ -57,6 +72,20 @@ public class MapFragment extends Fragment {
         Station2Marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         Station2Marker.setIcon(ctx.getDrawable(R.drawable.baseline_cloud_24));
 
+        Station1Marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView mapView) {
+                INFO(Station1STR);
+                return true;
+            }
+        });
+        Station2Marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView mapView) {
+                INFO(Station2STR);
+                return true;
+            }
+        });
         map.addOnFirstLayoutListener(new MapView.OnFirstLayoutListener() {
             @Override
             public void onFirstLayout(View v, int left, int top, int right, int bottom) {
@@ -96,6 +125,44 @@ public class MapFragment extends Fragment {
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
+    public void INFO(String STR){
+        APIInterface apiInterface;
+        apiInterface = ApIClient.getClient().create(APIInterface.class);
+        Call<AssetID[]> call = apiInterface.getAssetID();
+        call.enqueue(new Callback<AssetID[]>() {
+            @Override
+            public void onResponse(Call<AssetID[]> call, Response<AssetID[]> response) {
+                Log.d("API CALL", response.code() + "");
+                //Log.d("API CALL", response.toString());
+                AssetID assetID[] = response.body();
+                AssetID id = null;
+                if (assetID != null){
+                    for (int strID = 0; strID < assetID.length; strID++) {
+                        if (assetID[strID].name.equals(STR)) {
+                            Log.d("MAP ID", "onResponse: "+assetID[strID].id);
+                            id=assetID[strID];
+                            break;
+                        }
+
+                    }}
+                Log.d("MAP ID", "onResponse: "+id.id);
+                if (id.attributes.place != null)
+                {
+                    textView.setVisibility(View.VISIBLE);
+                    Log.d("View", "onResponse: "+id.attributes.place.value+" "+id.attributes.temp.value+" "+id.attributes.rainfall.value+" "+id.attributes.hum.value);
+                    textView.setText("Place: "+id.attributes.place.value+"\nTemperature: "+id.attributes.temp.value+"\nRainfall: "+id.attributes.rainfall.value+"\nHumidity "+id.attributes.hum.value);
+                }
+                else
+                {
+                    textView.setVisibility(View.INVISIBLE);
+                    textView.setText(null);
+                }
+            }
+            @Override
+            public void onFailure(Call<AssetID[]> call, Throwable t) {
+            }
+        });}
+
 
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();

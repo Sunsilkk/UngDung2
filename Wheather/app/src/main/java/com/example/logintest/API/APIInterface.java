@@ -2,6 +2,8 @@ package com.example.logintest.API;
 
 import com.example.logintest.Model.token;
 
+import com.example.logintest.Model.AssetID;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,5 +21,7 @@ public interface APIInterface {
 
     @GET("api/master/asset/{assetID}")
     Call<token> getAsset(@Path("assetID") String assetID);
+    @POST("api/master/asset/query")
+    Call <AssetID[]> getAssetID();
 
 }
