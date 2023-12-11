@@ -27,6 +27,8 @@ public class MapFragment extends Fragment {
     private static final double ZOOM_LEVEL = 19.5;
     private static final GeoPoint UIT_LOCATION = new GeoPoint(10.870, 106.80324);
     private static final GeoPoint STATION_1 = new GeoPoint(10.869778736885038, 106.80280655508835);
+    String NameStation1 = "HTTP Weather";
+    String NameStation2 = "Light";
     private static final GeoPoint STATION_2 = new GeoPoint(10.869778736885038, 106.80345028525176);
 
     @Override

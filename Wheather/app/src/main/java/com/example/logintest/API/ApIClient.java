@@ -76,7 +76,9 @@ public class ApIClient {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request newRequest  = chain.request().newBuilder()
+                            .addHeader("accept", "application/json")
                             .addHeader("Authorization", "Bearer " + token)
+                            .addHeader("Content-Type","application/json")
                             .build();
                     return chain.proceed(newRequest);
                 }
