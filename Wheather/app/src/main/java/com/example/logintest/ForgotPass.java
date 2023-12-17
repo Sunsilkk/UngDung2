@@ -1,17 +1,14 @@
 package com.example.logintest;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
+import static com.example.logintest.allVar.darkBackground;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -27,7 +24,10 @@ public class ForgotPass extends AppCompatActivity {
         Forgotpassinputlayout = findViewById(R.id.ForgotPass);
         Button btnreset = findViewById(R.id.btnReset);
         Button btnBack = findViewById(R.id.btnBack2);
-
+        ConstraintLayout background = findViewById(R.id.forgotPass);
+        if (darkBackground) {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+        }
         btnreset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

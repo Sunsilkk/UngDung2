@@ -1,11 +1,13 @@
 package com.example.logintest;
 
+import static com.example.logintest.allVar.darkBackground;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,6 +28,12 @@ public class RegisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regis);
 
+
+        ConstraintLayout background = findViewById(R.id.regisPage);
+        if (darkBackground)
+        {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+        }
         Button btnSignup = findViewById(R.id.btnSignUp);
         Button btnBack = findViewById(R.id.btnBack);
         usernameTextInputLayout  = findViewById(R.id.Username);

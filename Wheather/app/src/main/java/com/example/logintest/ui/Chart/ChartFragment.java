@@ -1,5 +1,7 @@
 package com.example.logintest.ui.Chart;
 
+import static com.example.logintest.allVar.darkBackground;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 
@@ -77,7 +80,11 @@ public class ChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_chart, container, false);
-
+        ConstraintLayout background = rootView.findViewById(R.id.chartFrag);
+        if (darkBackground)
+        {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+        }
         txtattribute = rootView.findViewById(R.id.attribute);
         txttime = rootView.findViewById(R.id.time);
         txtend = rootView.findViewById(R.id.ending);

@@ -53,4 +53,5 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("org.osmdroid:osmdroid-android:6.1.17")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
 }

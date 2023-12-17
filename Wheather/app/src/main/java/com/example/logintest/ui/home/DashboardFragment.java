@@ -1,6 +1,8 @@
 package com.example.logintest.ui.home;
 
 
+import static com.example.logintest.allVar.darkBackground;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.logintest.API.APIInterface;
@@ -41,7 +44,9 @@ public class DashboardFragment extends Fragment {
         ImageView descrImg = rootView.findViewById(R.id.descrImg);
         hi.setText("Hi, " + ApIClient.getName());
         APIInterface apiInterface;
-
+        ConstraintLayout background = rootView.findViewById(R.id.dashboardFrag);
+        if (darkBackground)
+            background.setBackgroundResource(R.drawable.dark_backgr);
         apiInterface = ApIClient.getClient().create(APIInterface.class);
 //        hi.setText(name);
         Call<token> call = apiInterface.getAsset("4EqQeQ0L4YNWNNTzvTOqjy");

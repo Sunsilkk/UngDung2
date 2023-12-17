@@ -1,5 +1,7 @@
 package com.example.logintest;
 
+import static com.example.logintest.allVar.darkBackground;
+
 import android.os.Bundle;
 
 
@@ -22,11 +24,13 @@ public class Dashboard extends AppCompatActivity {
 
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        if (darkBackground) {
+            navView.setBackgroundResource(R.drawable.bot_nav_dark);
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_dashboard);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_map);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 

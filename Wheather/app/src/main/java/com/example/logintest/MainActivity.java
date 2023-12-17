@@ -1,7 +1,8 @@
 package com.example.logintest;
-
+import static com.example.logintest.allVar.darkBackground;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ConstraintLayout background = findViewById(R.id.login);
+        if (darkBackground)
+        {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+        }
 
         usernameTextInputLayout = findViewById(R.id.Username);
         passwordTextInputLayout  = findViewById(R.id.Password);
@@ -106,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonchange = findViewById(R.id.btndaynight);
         buttonchange.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                darkBackground = !(darkBackground);
                 int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                 int newNightMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES ?
                         AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES;

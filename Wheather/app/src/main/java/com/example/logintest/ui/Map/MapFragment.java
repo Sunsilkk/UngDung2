@@ -1,5 +1,8 @@
 package com.example.logintest.ui.Map;
 
+import static com.example.logintest.allVar.darkBackground;
+import static com.example.logintest.allVar.globalAssetid;
+
 import android.Manifest;
 
 import com.example.logintest.API.APIInterface;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -42,6 +46,7 @@ public class MapFragment extends Fragment {
     private MapView map = null;
     private LinearLayout layout;
     TextView textView;
+    TextView text2;
     private long ZoomSpeed = 500;
     private double MinZoom = 18.0;
     private double MaxZoom = 21.0;
@@ -58,7 +63,16 @@ public class MapFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         textView = view.findViewById(R.id.textMap);
         textView.setVisibility(View.INVISIBLE);
+        text2 = view.findViewById(R.id.header_title);
 
+
+        ConstraintLayout background = view.findViewById(R.id.mapFrag);
+        if (darkBackground)
+        {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+            textView.setBackgroundResource(R.drawable.dark_backgr);
+            text2.setBackgroundResource(R.drawable.dark_backgr);
+        }
         Context ctx = requireContext();
 
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
@@ -158,6 +172,7 @@ public class MapFragment extends Fragment {
                         if (assetID[strID].name.equals(STR)) {
                             Log.d("MAP ID", "onResponse: "+assetID[strID].id);
                             id=assetID[strID];
+                            globalAssetid = id;
                             break;
                         }
 
