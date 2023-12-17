@@ -2,17 +2,21 @@ package com.example.logintest.ui.home;
 
 
 import static com.example.logintest.allVar.darkBackground;
+import static com.example.logintest.allVar.globalAssetid;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.logintest.API.APIInterface;
 import com.example.logintest.API.ApIClient;
@@ -42,13 +46,13 @@ public class DashboardFragment extends Fragment {
         TextView humid = rootView.findViewById(R.id.humid);
         TextView hi = rootView.findViewById(R.id.hi);
         ImageView descrImg = rootView.findViewById(R.id.descrImg);
+        Button logout = rootView.findViewById(R.id.btnLogout);
         hi.setText("Hi, " + ApIClient.getName());
         APIInterface apiInterface;
         ConstraintLayout background = rootView.findViewById(R.id.dashboardFrag);
         if (darkBackground)
             background.setBackgroundResource(R.drawable.dark_backgr);
         apiInterface = ApIClient.getClient().create(APIInterface.class);
-//        hi.setText(name);
         Call<token> call = apiInterface.getAsset("4EqQeQ0L4YNWNNTzvTOqjy");
         call.enqueue(new Callback<token>() {
             @Override
@@ -83,11 +87,14 @@ public class DashboardFragment extends Fragment {
                 } catch (NumberFormatException e)
                 {
                 }
-                String temp = asset.attributes.data.value.main.temp;
+                   String temp = asset.attributes.data.value.main.temp;
+//                String temp = globalAssetid.attributes.temp.value;
+
                 try {
                     float floatValue = Float.parseFloat(temp);
                     long inttemp = Math.round(floatValue);
                     Temper.setText(String.valueOf(inttemp)+"\u00B0C");
+
                 } catch (NumberFormatException e) {
                 }
                 String feels = asset.attributes.data.value.main.feels_like;
@@ -97,6 +104,7 @@ public class DashboardFragment extends Fragment {
                     Feels.setText("Feels Like: "+String.valueOf(intfeels) + "\u00B0C");
                 } catch (NumberFormatException e) {
                 }
+//                String humidity = globalAssetid.attributes.hum.value;
                 String humidity = asset.attributes.data.value.main.humidity;
                 humid.setText("Humidity \n"+ humidity + "%");
                 String Location = asset.attributes.data.value.name;
@@ -125,6 +133,17 @@ public class DashboardFragment extends Fragment {
                 Log.d("API CALL", t.getMessage().toString());
             }
         });
+        logout.setOnClickListener(v -> {
+            finishFragment();
+        });
         return rootView;
+    }
+    private void finishFragment() {
+        // Perform the fragment transaction to remove the fragment
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.remove(this);
+        fragmentTransaction.commit();
     }
 }
