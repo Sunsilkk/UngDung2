@@ -1,5 +1,7 @@
 package com.example.logintest.ui.Chart;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import androidx.fragment.app.Fragment;
 
@@ -30,6 +34,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,6 +70,8 @@ public class ChartFragment extends Fragment {
     String att = "temperature";
     String time = "Day";
     Asset body;
+    String selectedDateTime;
+
 
 
     @Override
@@ -89,6 +96,7 @@ public class ChartFragment extends Fragment {
 
         txtend.setText(" ");
 
+
         txtattribute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,8 +112,13 @@ public class ChartFragment extends Fragment {
                 time = item;
             }
         });
+        txtend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimePickerDialog();
 
-
+            }
+        });
         // Create an instance of the APIInterface
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://uiot.ixxc.dev/")
@@ -121,25 +134,33 @@ public class ChartFragment extends Fragment {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(time == "Hour"){
+                if (txtend.getText().toString().equals(" ")){
                     totime = System.currentTimeMillis();
+                }else {
+                    txtend.setText(txtend.getText().toString());
+                    String dateTimeString = txtend.getText().toString();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    ParsePosition pp1 = new ParsePosition(0);
+                    Date date = dateFormat.parse(dateTimeString,pp1);
+                    long timestamp = date.getTime();
+                    totime = timestamp;
+                    Log.d("date2", String.valueOf(timestamp));
+                }
+
+                if(time == "Hour"){
                     fromtime = totime - 3600000;
                     body = new Asset((long)fromtime, (long)totime,"string");
 
                 } else if (time == "Day") {
-                    totime = System.currentTimeMillis();
                     fromtime = totime - 86400000 ;
                     body = new Asset((long)fromtime, (long)totime,"string");
                 } else if (time == "Week") {
-                    totime = System.currentTimeMillis();
                     fromtime = totime - 604800000 ;
                     body = new Asset((long)fromtime, (long)totime,"string");
                 } else if ( time=="Month"){
-                    totime = System.currentTimeMillis();
                     fromtime = totime - 2678400000L ;
                     body = new Asset((long)fromtime, (long)totime,"string");
                 } else if (time =="Year"){
-                    totime = System.currentTimeMillis();
                     fromtime = totime - 31536000000L ;
                     body = new Asset((long)fromtime, (long)totime,"string");
 
@@ -163,7 +184,7 @@ public class ChartFragment extends Fragment {
                             for (dataPoint dataPoint : dataPoints) {
                                 long x = dataPoint.getX();
                                 float y = (float)dataPoint.getY();
-                                SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+                                SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                 String end = sdf1.format(x);
                                 ending.add(end);
                                 dataList.add(0, y);
@@ -202,8 +223,19 @@ public class ChartFragment extends Fragment {
 
                                 Log.d("DataPoint", "x: " + x + ", y: " + y);
                             }
-                            List<Entry> entries = new ArrayList<>();
 
+                            try {
+                                txtend.setText(ending.get(0).toString());
+                            }
+                            catch(Exception e) {
+                                dataList.add((float)-1);
+                                yourXAxisValues.add(String.valueOf(0));
+
+                            }
+
+
+
+                            List<Entry> entries = new ArrayList<>();
                             if(time == "Hour"){
                                 int minute = Integer.parseInt(yourXAxisValues.get(0));
                                 yourXAxisValues.clear();
@@ -302,7 +334,7 @@ public class ChartFragment extends Fragment {
                                 }
                             }
 
-                            txtend.setText(ending.get(0).toString());
+
                             LineDataSet dataSet = new LineDataSet(entries, att); // add entries to dataset
                             if(time=="Hour"){
                                 dataSet.enableDashedLine(0, 1, 0);
@@ -314,7 +346,6 @@ public class ChartFragment extends Fragment {
                                 dataSet.setDrawFilled(true);
                             } else if (time == "Week") {
                                 chart.getAxisLeft().setStartAtZero(false);
-
                                 dataSet.setDrawFilled(true);
                             } else if (time == "Month") {
                                 chart.getAxisLeft().setStartAtZero(false);
@@ -322,17 +353,23 @@ public class ChartFragment extends Fragment {
                                 dataSet.setDrawFilled(true);
                             } else if (time == "Year") {
                                 chart.getAxisLeft().setStartAtZero(false);
-                                chart.getXAxis().setLabelCount(entries.size()/4);
+                                chart.getXAxis().setLabelCount(entries.size());
                                 dataSet.setDrawFilled(true);}
 
+                            if(yourXAxisValues.size()==1){
+                                chart.getXAxis().setLabelCount(yourXAxisValues.size());
+                                chart.getAxisLeft().setStartAtZero(true);
+                            }
+
                             chart.setVisibility(View.VISIBLE);
+                            dataSet.setDrawCircles(true);
+                            dataSet.setDrawValues(false);
                             dataSet.setColor(Color.BLUE);
                             dataSet.setValueTextColor(Color.BLACK);
-                            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); // if you want the line to be smooth
+                            dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+ // if you want the line to be smooth
                             // if you want the area below the line to be filled
                             dataSet.setFillColor(Color.BLUE);
-                            dataSet.setDrawCircles(true); // to draw the circles
-                            dataSet.setDrawValues(false);
                             dataSet.setCircleColor(Color.BLUE);
                             dataSet.setCircleRadius(5f);
 
@@ -347,14 +384,14 @@ public class ChartFragment extends Fragment {
                             chart.getXAxis().setDrawAxisLine(true); // Only show the x-axis line
                             chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // X-axis at the bottom
 
-                            if(yourXAxisValues.size()==1){
-                                chart.getXAxis().setLabelCount(yourXAxisValues.size());
-                            }
+
                             chart.getAxisRight().setEnabled(false); // No right y-axis
                             chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(yourXAxisValues){}); // To format the x-axis labels
                             chart.getLegend().setEnabled(true); // No legend
 
                             chart.invalidate(); // refresh
+                            ending.clear();
+
                         }
                         else {
                             Log.d("API CALL", "Response not successful");
@@ -371,6 +408,48 @@ public class ChartFragment extends Fragment {
 
         return rootView;
     }
+    private void showDateTimePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        // DatePickerDialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Xử lý ngày tháng năm được chọn
+                        String date = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+                        // TimePickerDialog
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(requireContext(),
+                                new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                        // Xử lý giờ phút được chọn
+                                        String time = hourOfDay + ":" + minute;
+
+                                        // Kết hợp ngày và giờ để có ngày giờ đầy đủ
+                                        selectedDateTime = date + " " + time;
+
+                                        // Hiển thị lên EditText
+                                        txtend.setText(selectedDateTime);
+                                        Log.d("date",selectedDateTime);
+                                    }
+                                }, hour, minute, true); // Đặt true để hiển thị đồng hồ 24 giờ
+
+                        // Hiển thị hộp thoại chọn giờ
+                        timePickerDialog.show();
+                    }
+                }, year, month, day);
+
+        // Hiển thị hộp thoại chọn ngày
+        datePickerDialog.show();
+    }
+
 
 
 }
