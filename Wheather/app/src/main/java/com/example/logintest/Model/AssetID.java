@@ -57,6 +57,41 @@ public class AssetID {
             @SerializedName("name")
             public String name;
         }
+        @SerializedName("brightness")
+        public  Bright bright;
+        public class Bright{
+            @SerializedName("value")
+            public String value;
 
+        }
+        @SerializedName("colourTemperature")
+        public ColourTemp colourTemperature;
+        public class ColourTemp{
+            @SerializedName("value")
+            public String value;
+
+        }
+        @SerializedName("colourRGB")
+        public ColourRGB colourRGB;
+        public class ColourRGB{
+            @SerializedName("value")
+            public String value;
+
+        }
+        @SerializedName("email")
+        public Email email;
+        public class Email{
+            @SerializedName("value")
+            public String value;
+
+        }
+
+        @SerializedName("onOff")
+        public OnOff onOff;
+        public class OnOff{
+            @SerializedName("value")
+            public String value;
+
+        }
     }
 }

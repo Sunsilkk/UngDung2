@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,11 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -52,9 +55,10 @@ import okhttp3.Response;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.app.Activity.RESULT_OK;
+import static com.example.logintest.allVar.darkBackground;
 
 public class DashboardFragment extends Fragment {
-    private TextView city, temp, main, humidity, wind, realFeel, time;
+    private TextView city, temp, main, humidity, wind, realFeel, time, id_degree, id_main;
     private ImageView weatherImage;
     private FusedLocationProviderClient client;
     private static int indexfor = 5;
@@ -67,6 +71,15 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dashboardddddd, container, false);
 
+        ScrollView background = view.findViewById(R.id.dasshhhh);
+        id_degree = view.findViewById(R.id.id_degree);
+        id_main = view.findViewById(R.id.id_main);
+        if (darkBackground)
+        {
+            background.setBackgroundResource(R.drawable.dark_backgr);
+            id_degree.setTextColor(Color.WHITE);
+            id_main.setTextColor(Color.WHITE);
+        }
         city = view.findViewById(R.id.id_city);
         temp = view.findViewById(R.id.id_degree);
         main = view.findViewById(R.id.id_main);

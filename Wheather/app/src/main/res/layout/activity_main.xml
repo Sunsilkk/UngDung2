@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/login"
-    android:background="@drawable/background_image">
+    android:background="@drawable/bacckk">
 
 
     <com.google.android.material.button.MaterialButton
@@ -27,22 +27,22 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/alon_bold"
         android:text="LOGIN"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/Username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1"
-        android:layout_marginBottom="40dp"
-        android:textSize="25sp"
-         />
+        app:layout_constraintVertical_bias="1.0" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Password"
         style="?attr/textInputFilledStyle"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="302dp"
+        android:layout_height="56dp"
         android:layout_marginTop="30dp"
         android:hint="Password"
         app:endIconMode="password_toggle"
@@ -55,8 +55,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:text="123" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,37 +106,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
         android:hint="Username"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        >
+        app:layout_constraintVertical_bias="0.1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="user" />
-
-
+            android:layout_height="60dp"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alon_bold"
-        android:text="UiTwT"
-        android:textSize="80sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="364dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/Username"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.4"
-        android:textColor="#00d7cb"
-        />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alon_bold"
+            android:text="UiTwT"
+
+            android:textSize="80sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.266" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     <!--        <WebView-->
 <!--        android:id="@+id/webview"-->

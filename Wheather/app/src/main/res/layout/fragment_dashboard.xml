@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteX="-6dp"
     tools:layout_editor_absoluteY="-37dp"
     android:id="@+id/dashboardFrag"
-    android:background="@drawable/background_image">
+    android:background="@drawable/appback22">
 
 
     <!--Description-->

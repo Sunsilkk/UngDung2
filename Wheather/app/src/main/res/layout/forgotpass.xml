@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/forgotPass"
-    android:background="@drawable/background_image">
+    android:background="@drawable/bacckk">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack2"
