@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/dasshhhh"
     android:fillViewport="true"
+    android:background="@drawable/appback22"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/appback3">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/id_city"
@@ -462,6 +463,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/moreicon"
              />
+
+
 
     </RelativeLayout>
 </ScrollView>
