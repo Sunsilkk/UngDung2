@@ -60,6 +60,7 @@ public class DashboardFragment extends Fragment {
     private static int indexfor = 5;
     private static String lat;
     private static String lon;
+    public static String apikey = "b7e355ceb16c12ca7846fbc2b724e15f";
 
     @Nullable
     @Override
@@ -148,7 +149,7 @@ public class DashboardFragment extends Fragment {
     private void WeatherByCityName(String city) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + "b7e355ceb16c12ca7846fbc2b724e15f" + "&units=metric")
+                .url("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apikey + "&units=metric")
                 .get().build();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -183,7 +184,7 @@ public class DashboardFragment extends Fragment {
     private void WeatherByLatLon(String lat,String lon){
         OkHttpClient client=new OkHttpClient();
         Request request=new Request.Builder()
-                .url("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+"b7e355ceb16c12ca7846fbc2b724e15f"+"&units=metric")
+                .url("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+apikey+"&units=metric")
                 .get().build();
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
