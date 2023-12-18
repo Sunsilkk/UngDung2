@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/appback22"
+    android:background="@drawable/chart_dark"
     android:id="@+id/chartFrag"
     tools:context=".ui.Chart.ChartFragment">
 
@@ -17,8 +17,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/backgroundforecast"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout2"

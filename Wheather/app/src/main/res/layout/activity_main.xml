@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/login"
-    android:background="@drawable/bacckk">
+    android:background="@drawable/gradient_list"
+
+    >
 
 
     <com.google.android.material.button.MaterialButton
@@ -136,13 +138,13 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/alon_bold"
             android:text="UiTwT"
-
             android:textSize="80sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.266" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -28,6 +28,7 @@ import com.example.logintest.API.dataPoint;
 import com.example.logintest.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -83,7 +84,7 @@ public class ChartFragment extends Fragment {
         ConstraintLayout background = rootView.findViewById(R.id.chartFrag);
         if (darkBackground)
         {
-            background.setBackgroundResource(R.drawable.dark_backgr);
+            background.setBackgroundResource(R.drawable.chart_light_background);
         }
         txtattribute = rootView.findViewById(R.id.attribute);
         txttime = rootView.findViewById(R.id.time);
@@ -369,31 +370,53 @@ public class ChartFragment extends Fragment {
                             }
 
                             chart.setVisibility(View.VISIBLE);
+
+
                             dataSet.setDrawCircles(true);
                             dataSet.setDrawValues(false);
-                            dataSet.setColor(Color.BLUE);
+                            dataSet.setColor(Color.YELLOW);
                             dataSet.setValueTextColor(Color.BLACK);
                             dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
- // if you want the line to be smooth
-                            // if you want the area below the line to be filled
-                            dataSet.setFillColor(Color.BLUE);
-                            dataSet.setCircleColor(Color.BLUE);
+                            dataSet.setFillColor(Color.YELLOW);
+                            dataSet.setCircleColor(Color.YELLOW);
                             dataSet.setCircleRadius(5f);
+
+
+                            chart.setBackgroundColor(Color.TRANSPARENT);
+                            chart.setGridBackgroundColor(Color.GRAY);
+                            chart.setBorderColor(Color.DKGRAY);
+                            chart.setBorderWidth(2f);
+                            chart.getDescription().setEnabled(false);
+
+                            XAxis xAxis = chart.getXAxis();
+                            xAxis.setTextColor(Color.BLACK);
+                            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                            xAxis.setDrawGridLines(false);
+
+                            YAxis yAxis = chart.getAxisLeft();
+                            yAxis.setTextColor(Color.BLACK);
+                            yAxis.setDrawGridLines(true);
+                            yAxis.setGridColor(Color.GRAY);
+
+
+                            chart.animateX(1000);
+
+                            chart.invalidate();
 
                             LineData lineData = new LineData(dataSet);
                             chart.setData(lineData);
-                            chart.getDescription().setEnabled(false); // No description at the bottom
-                            chart.getAxisLeft().setDrawGridLines(false); // No grid lines
-                            chart.getAxisLeft().setDrawAxisLine(false); // No axis line
-                            chart.getAxisLeft().setDrawLabels(true); // to show y-axis labels
+                            chart.getDescription().setEnabled(false);
+                            chart.getAxisLeft().setDrawGridLines(false);
+                            chart.getAxisLeft().setDrawAxisLine(false);
+                            chart.getAxisLeft().setDrawLabels(true);
                             chart.getXAxis().setDrawLabels(true);
-                            chart.getXAxis().setDrawGridLines(false); // No grid lines
-                            chart.getXAxis().setDrawAxisLine(true); // Only show the x-axis line
-                            chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // X-axis at the bottom
+                            chart.getXAxis().setDrawGridLines(false);
+                            chart.getXAxis().setDrawAxisLine(true);
+                            chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
 
                             chart.getAxisRight().setEnabled(false); // No right y-axis
-                            chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(yourXAxisValues){}); // To format the x-axis labels
+                            chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(yourXAxisValues){});
                             chart.getLegend().setEnabled(true); // No legend
 
                             chart.invalidate(); // refresh

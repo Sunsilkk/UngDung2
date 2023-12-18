@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.AnimatedImageDrawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +39,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ConstraintLayout background = findViewById(R.id.login);
-        if (darkBackground)
-        {
-            background.setBackgroundResource(R.drawable.dark_backgr);
-        }
+        AnimationDrawable animation = (AnimationDrawable) background.getBackground();
+        animation.setEnterFadeDuration(2000);
+        animation.setExitFadeDuration(4500);
+        animation.start();
+
+
+//        if (darkBackground)
+//        {
+//            background.setBackgroundResource(R.drawable.dark_backgr);
+//        }
 
         usernameTextInputLayout = findViewById(R.id.Username);
         passwordTextInputLayout  = findViewById(R.id.Password);

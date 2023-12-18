@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
 import com.example.logintest.R;
@@ -72,13 +75,23 @@ public class MapFragment extends Fragment {
         textView.setVisibility(View.INVISIBLE);
         text2 = view.findViewById(R.id.header_title);
         dialogMap = view.findViewById(R.id.dialog_map);
+        Button logout = view.findViewById(R.id.btnLogout);
+
+        logout.setOnClickListener(v -> {
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.remove(this);
+            fragmentTransaction.commit();
+        });
+
 
         ConstraintLayout background = view.findViewById(R.id.mapFrag);
         if (darkBackground)
         {
-            background.setBackgroundResource(R.drawable.dark_backgr);
-            textView.setBackgroundResource(R.drawable.dark_backgr);
-            text2.setBackgroundResource(R.drawable.dark_backgr);
+
+            textView.setBackgroundResource(R.drawable.map_grey);
+            text2.setBackgroundResource(R.drawable.map_grey);
         }
         Context ctx = requireContext();
 
@@ -158,6 +171,8 @@ public class MapFragment extends Fragment {
                 Manifest.permission.ACCESS_FINE_LOCATION};
 
         requestPermissionsIfNecessary(Permission);
+
+
 
         return view;
     }
@@ -248,4 +263,6 @@ public class MapFragment extends Fragment {
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
+
+
 }
