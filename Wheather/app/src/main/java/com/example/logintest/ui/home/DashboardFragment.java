@@ -1,149 +1,195 @@
 package com.example.logintest.ui.home;
 
-
-import static com.example.logintest.allVar.darkBackground;
-import static com.example.logintest.allVar.globalAssetid;
-
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.logintest.API.APIInterface;
-import com.example.logintest.API.ApIClient;
-import com.example.logintest.Model.token;
 import com.example.logintest.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class DashboardFragment extends Fragment {
+    private TextView city, temp, main, humidity, wind, realFeel, time;
+    private ImageView weatherImage;
+    private FusedLocationProviderClient client;
+    private static int indexfor = 5;
+    private static String lat;
+    private static String lon;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragmentdashboard, container, false);
+
+        city = view.findViewById(R.id.id_city);
+        temp = view.findViewById(R.id.id_degree);
+        main = view.findViewById(R.id.id_main);
+        humidity = view.findViewById(R.id.id_humidity);
+        wind = view.findViewById(R.id.id_wind);
+        realFeel = view.findViewById(R.id.id_realfeel);
+        weatherImage = view.findViewById(R.id.id_weatherImage);
+        time = view.findViewById(R.id.id_time);
+        client = LocationServices.getFusedLocationProviderClient(requireActivity());
+
+        if (ActivityCompat.checkSelfPermission(requireContext(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), ACCESS_FINE_LOCATION)) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{ACCESS_FINE_LOCATION}, 1);
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+
+        client.getLastLocation().addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    double latitude = Math.round(location.getLatitude() * 100.0) / 100.0;
+                    lat = String.valueOf(latitude);
+
+                    double longitude = Math.round(location.getLongitude() * 100.0) / 100.0;
+                    lon = String.valueOf(longitude);
+
+                    WeatherByLatLon(lat, lon);
+                } else {
+                    WeatherByCityName("London");
+                }
+            }
+        });
+
+        return view;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        TextView day = rootView.findViewById(R.id.day);
-        TextView location = rootView.findViewById(R.id.location);
-        TextView Temper = rootView.findViewById(R.id.temp);
-        TextView Feels = rootView.findViewById(R.id.feels);
-        TextView descr = rootView.findViewById(R.id.descr);
-        TextView Sunrise =rootView.findViewById(R.id.sunrise);
-        TextView Sunset = rootView.findViewById(R.id.sunset);
-        TextView humid = rootView.findViewById(R.id.humid);
-        TextView hi = rootView.findViewById(R.id.hi);
-        ImageView descrImg = rootView.findViewById(R.id.descrImg);
-        Button logout = rootView.findViewById(R.id.btnLogout);
-        hi.setText("Hi, " + ApIClient.getName());
-        APIInterface apiInterface;
-        ConstraintLayout background = rootView.findViewById(R.id.dashboardFrag);
-        if (darkBackground)
-            background.setBackgroundResource(R.drawable.dark_backgr);
-        apiInterface = ApIClient.getClient().create(APIInterface.class);
-        Call<token> call = apiInterface.getAsset("4EqQeQ0L4YNWNNTzvTOqjy");
-        call.enqueue(new Callback<token>() {
-            @Override
-            public void onResponse(Call<token> call, Response<token> response) {
-                token asset = response.body();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                        client.getLastLocation().addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                if (location != null) {
+                                    double latitude = Math.round(location.getLatitude() * 100.0) / 100.0;
+                                    lat = String.valueOf(latitude);
 
-                String dt = asset.attributes.data.value.dt;
-                try {
-                    long time = Long.parseLong(dt) * 1000L;
-                    Date date = new Date(time);
-                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.getDefault());
-                    String _day = sdf.format(date);
-                    day.setText(_day);
-                } catch (NumberFormatException e) {
-                }
-                String sunrise = asset.attributes.data.value.sys.sunrise;
-                try {
-                    long time = Long.parseLong(sunrise) * 1000L;
-                    Date timerise = new Date(time);
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                    String formattedTimerise = sdf.format(timerise);
-                    Sunrise.setText("Sunrise \n "+formattedTimerise);
-                } catch (NumberFormatException e) {
-                }
-                String sunset = asset.attributes.data.value.sys.sunset;
-                try {
-                    long time = Long.parseLong(sunset) * 1000L;
-                    Date timeset = new Date(time);
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                    String formattedTimeset = sdf.format(timeset);
-                    Sunset.setText("Sunset \n"+formattedTimeset);
-                } catch (NumberFormatException e)
-                {
-                }
-                   String temp = asset.attributes.data.value.main.temp;
-//                String temp = globalAssetid.attributes.temp.value;
+                                    double longitude = Math.round(location.getLongitude() * 100.0) / 100.0;
+                                    lon = String.valueOf(longitude);
 
-                try {
-                    float floatValue = Float.parseFloat(temp);
-                    long inttemp = Math.round(floatValue);
-                    Temper.setText(String.valueOf(inttemp)+"\u00B0C");
-
-                } catch (NumberFormatException e) {
+                                    WeatherByLatLon(lat, lon);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
                 }
-                String feels = asset.attributes.data.value.main.feels_like;
-                try {
-                    float floatValue = Float.parseFloat(feels);
-                    long intfeels = Math.round(floatValue);
-                    Feels.setText("Feels Like: "+String.valueOf(intfeels) + "\u00B0C");
-                } catch (NumberFormatException e) {
-                }
-//                String humidity = globalAssetid.attributes.hum.value;
-                String humidity = asset.attributes.data.value.main.humidity;
-                humid.setText("Humidity \n"+ humidity + "%");
-                String Location = asset.attributes.data.value.name;
-                location.setText(Location);
-                String desc = asset.attributes.data.value.weather[0].description;
-                descr.setText(desc);
-                String main = asset.attributes.data.value.weather[0].main;
-                switch (main) {
-                    case "Clouds":
-                        descrImg.setImageResource(R.drawable.cloud);
-                        break;
-                    case "Clear":
-                        descrImg.setImageResource(R.drawable.clear);
-                        break;
-                    case "Rain":
-                        descrImg.setImageResource(R.drawable.rain);
-                        break;
-                    case "Sunny":
-                        descrImg.setImageResource(R.drawable.sun);
-                        break;
-                }
+                return;
             }
-
-            @Override
-            public void onFailure(Call<token> call, Throwable t) {
-                Log.d("API CALL", t.getMessage().toString());
-            }
-        });
-        logout.setOnClickListener(v -> {
-            finishFragment();
-        });
-        return rootView;
+        }
     }
-    private void finishFragment() {
-        // Perform the fragment transaction to remove the fragment
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.remove(this);
-        fragmentTransaction.commit();
+    private void WeatherByCityName(String city) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + "a89a6e08937dc3686c3da1c1bc341285" + "&units=metric")
+                .get().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try{
+            Response response = client.newCall(request).execute();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    // Handle failure
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    String data = response.body().string();
+                    try {
+                        JSONObject json = new JSONObject(data);
+                        JSONObject city = json.getJSONObject("city");
+                        JSONObject coord = city.getJSONObject("coord");
+                        String lat = coord.getString("lat");
+                        String lon = coord.getString("lon");
+                        WeatherByLatLon(lat, lon);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void WeatherByLatLon(String lat, String lon) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + "a89a6e08937dc3686c3da1c1bc341285" + "&units=metric")
+                .get().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            Response response = client.newCall(request).execute();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    // Handle failure
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    String data = response.body().string();
+                    try {
+                        JSONObject json = new JSONObject(data);
+                        // Parse the weather data and update the UI
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

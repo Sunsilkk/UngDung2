@@ -23,13 +23,6 @@
             android:name=".Dashboard"
             android:exported="false"
             android:label="@string/title_activity_dashboard" />
-        <activity
-            android:name=".NavigationViewtest"
-            android:exported="false"
-            android:label="@string/title_activity_navigation_viewtest" />
-        <activity
-            android:name=".NavigationActivities"
-            android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".MapFragment"-->
 <!--            android:exported="false" />-->
@@ -49,6 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".webview" />
+        <activity android:name=".CitySearch"></activity>
     </application>
 
 </manifest>
