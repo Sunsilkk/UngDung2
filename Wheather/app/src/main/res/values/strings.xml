@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">logintest</string>
+    <string name="title_activity_navigation_viewtest">NavigationViewtest</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_map">Map</string>
+    <string name="title_chart">Chart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name = "select1">Select Attribute</string>
+    <string name = "select2">Select Time</string>
+    <string name = "select3">Ending</string>
+</resources>

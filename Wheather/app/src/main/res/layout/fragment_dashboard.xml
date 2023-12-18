@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.DashboardFragment"
+    tools:layout_editor_absoluteX="-6dp"
+    tools:layout_editor_absoluteY="-37dp"
+    android:id="@+id/dashboardFrag"
+    android:background="@drawable/background_image">
+
+
+    <!--Description-->
+
+    <!-- Day + temp + Location + feels -->
+
+    <TextView
+        android:id="@+id/hi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Hi, ?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/border1"
+        android:layout_width="377dp"
+        android:layout_height="283dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/border" />
+
+    <ImageView
+        android:id="@+id/descrImg"
+        android:layout_width="101dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintEnd_toEndOf="@+id/border1"
+        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintStart_toStartOf="@+id/border1"
+        app:layout_constraintTop_toTopOf="@+id/border1"
+        app:srcCompat="@drawable/weather" />
+
+    <TextView
+        android:id="@+id/descr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Decription"
+        app:layout_constraintEnd_toEndOf="@+id/border1"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toStartOf="@+id/border1"
+        app:layout_constraintTop_toBottomOf="@+id/descrImg" />
+
+    <!--  Sunrise + Sunset + Humid-->
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.331"
+        app:layout_constraintStart_toEndOf="@id/descrImg"
+        app:layout_constraintTop_toTopOf="@+id/border1" />
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="12dp"
+        android:text="Temp"
+        app:layout_constraintStart_toEndOf="@+id/descrImg"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:text="Location"
+        app:layout_constraintStart_toEndOf="@+id/descrImg"
+        app:layout_constraintTop_toBottomOf="@+id/day" />
+
+    <TextView
+        android:id="@+id/feels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:text="Feels"
+        app:layout_constraintStart_toEndOf="@+id/descr"
+        app:layout_constraintTop_toBottomOf="@+id/temp" />
+
+    <ImageView
+        android:id="@+id/border2"
+        android:layout_width="373dp"
+        android:layout_height="355dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/border1"
+        app:srcCompat="@drawable/rainbow_border" />
+
+    <ImageView
+        android:id="@+id/humidImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/border2"
+        app:layout_constraintTop_toBottomOf="@+id/sunrise"
+        app:srcCompat="@drawable/humidity" />
+
+    <TextView
+        android:id="@+id/humid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Humid"
+        app:layout_constraintStart_toEndOf="@+id/humidImg"
+        app:layout_constraintTop_toBottomOf="@+id/sunrise" />
+
+    <ImageView
+        android:id="@+id/sunriseImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="@+id/border2"
+        app:layout_constraintTop_toTopOf="@+id/border2"
+        app:srcCompat="@drawable/sunrise" />
+
+    <TextView
+        android:id="@+id/sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="12dp"
+        android:text="Sunrise"
+        app:layout_constraintStart_toStartOf="@+id/border2"
+        app:layout_constraintTop_toBottomOf="@+id/sunriseImg" />
+
+    <ImageView
+        android:id="@+id/sunsetImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@+id/sunriseImg"
+        app:layout_constraintTop_toTopOf="@+id/border2"
+        app:srcCompat="@drawable/sunset" />
+
+    <TextView
+        android:id="@+id/sunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
+        android:text="Sunset"
+        app:layout_constraintStart_toEndOf="@+id/sunrise"
+        app:layout_constraintTop_toBottomOf="@+id/sunsetImg" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="153dp"
+        android:layout_height="52dp"
+        android:fontFamily="@font/alon_bold"
+        android:text="UiTwT"
+        android:textColor="#00d7cb"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alon_bold"
+        android:text="Log out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
